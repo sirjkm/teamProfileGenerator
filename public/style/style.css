@@ -1,0 +1,7 @@
+.input-group {
+    display: flex;
+    margin-left: 20%;
+    align-items: center;
+    gap: 1%
+}
+
