@@ -19,11 +19,46 @@
         <label class="input-group-text" for="inputGroupSelect01">Options</label>
         <select class="form-select" id="inputGroupSelect01">
             <option selected>Choose...</option>
-            <option value="Manager">Manager</option>
-            <option value="Engineer">Engineer</option>
-            <option value="Intern">Intern</option>
+            <option value="Manager" id="manager">Manager</option>
+            <option value="Engineer" id="engineer">Engineer</option>
+            <option value="Intern" id="intern">Intern</option>
         </select>
     </div>
+
+<script type="text/javascript">
+    const manager = document.addEventListener('manager');
+    const engineer = document.addEventListener('engineer');
+    const intern = document.addEventListener('intern');
+
+    function createTeam() {
+        const form = document.createElement('form');
+        form.setAttribute('method', 'post');
+        form.setAttribute('action', 'teams.html');
+
+        var fullName = document.createElement("input");
+        fullName.setAttribute("type", "text");
+        fullName.setAttribute("name", "fullName");
+        fullName.setAttribute("placeholder", "Full Name");
+
+        var employeeID = document.createElement("input");
+        employeeID.setAttribute("type", "text");
+        employeeID.setAttribute("name", "employeeID");
+        employeeID.setAttribute("placeholder", "Employee ID");
+
+        var email = document.createElement("input");
+        email.setAttribute("type", "text");
+        email.setAttribute("name", "email");
+        email.setAttribute("placeholder", "Email");
+
+        var phoneNumber = document.createElement("input");
+        phoneNumber.setAttribute("type", "text");
+        phoneNumber.setAttribute("name", "phoneNumber");
+        phoneNumber.setAttribute("placeholder", "Phone Number");
+    };
+
+
+
+</script>
 
 </body>
 </html>
