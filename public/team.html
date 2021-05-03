@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    <title>My Team Page</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="text-center"><span class="fa fa-users"></span> My Team Profile</h1>
+            <hr />
+            <h3 class="text-center">Current Team Members + Info</h3>
+            <br />
+
+            <div class="text-center">
+                <a href="./index.html"><button class="btn btn-lg btn-default"><span class="fa fa-home"></span></button></a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Current Team Members</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul id="tableList" class="list-group"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+<script type="text/javascript">
+
+const runTableQuery = () => {
+    fetch('/api/tables', {
+        method: 'GET',
+        headers: {
+        'Content-Type': 'application/json',
+        },
+    })
+        .then((response) => response.json())
+        .then((tableData) => {
+        console.log('tableData', tableData);
+        console.log('------------------------------------');
+
+        for (let i = 0; i < tableData.length; i++) {
+            // Get a reference to the tableList element and populate it with tables
+            const tableList = document.getElementById('tableList');
+
+            // Then display the fields in the HTML (Section Name, Date, URL)
+            let listItem = document.createElement('li');
+            listItem.classList.add('list-group-item', 'mt-4');
+
+            // Create elements for Table ID, ID, Name, Email, Phone
+            const tableEl = document.createElement('h2');
+            tableEl.textContent = `Table #${i + 1}`;
+
+            const hrBreak = document.createElement('hr');
+
+            const idEl = document.createElement('h2');
+            idEl.textContent = `ID: ${tableData[i].customerID}`;
+
+            const nameEl = document.createElement('h2');
+            nameEl.textContent = `Name: ${tableData[i].customerName}`;
+
+            const emailEl = document.createElement('h2');
+            emailEl.textContent = `Email: ${tableData[i].customerEmail}`;
+
+            const phoneEl = document.createElement('h2');
+            phoneEl.textContent = `Phone: ${tableData[i].phoneNumber}`;
+
+            // Append all elements to the listItem
+            listItem.appendChild(tableEl);
+            listItem.appendChild(hrBreak);
+            listItem.appendChild(idEl);
+            listItem.appendChild(nameEl);
+            listItem.appendChild(emailEl);
+            listItem.appendChild(phoneEl);
+
+            // Append listItem to tableList
+            tableList.appendChild(listItem);
+        }
+        })
+        .catch((error) => {
+        console.error('Error:', error);
+        });
+    };
+
+    // This function resets all of the data in our tables. This is intended to let you restart a demo.
+    const clearTable = () => {
+    alert('Clearing...');
+
+    fetch('/api/clear', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        },
+    })
+        .then((response) => response.json())
+        .then((data) => {
+        let waitList = document.getElementById('waitList');
+        waitList.innerHTML = '';
+
+        let tableList = document.getElementById('tableList');
+        tableList.innerHTML = '';
+        })
+        .catch((error) => {
+        console.error('Error:', error);
+        });
+    };
+
+    let clear = document.getElementById('clear');
+    clear.addEventListener('click', clearTable)
+
+    runTableQuery();
+</script>
+
+</html>
