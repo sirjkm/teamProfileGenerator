@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/sirjkm/teamProfileGenerator/issues"
   },
-  "homepage": "https://github.com/sirjkm/teamProfileGenerator#readme"
+  "homepage": "https://github.com/sirjkm/teamProfileGenerator#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
