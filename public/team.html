@@ -27,7 +27,7 @@
                         <h4>Current Team Members</h4>
                     </div>
                     <div class="card-body">
-                        <ul id="tableList" class="list-group"></ul>
+                        <ul id="teamList" class="list-group"></ul>
                     </div>
                 </div>
             </div>
@@ -38,53 +38,43 @@
 
 <script type="text/javascript">
 
-const runTableQuery = () => {
-    fetch('/api/tables', {
+const runTeamQuery = () => {
+    fetch('/api/team', {
         method: 'GET',
-        headers: {
-        'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
     })
         .then((response) => response.json())
-        .then((tableData) => {
-        console.log('tableData', tableData);
+        .then((teamData) => {
+        console.log('teamData', teamData);
         console.log('------------------------------------');
 
-        for (let i = 0; i < tableData.length; i++) {
-            // Get a reference to the tableList element and populate it with tables
-            const tableList = document.getElementById('tableList');
+        for (let i = 0; i < teamData.length; i++) {
+            const teamList = document.getElementById('teamList');
 
-            // Then display the fields in the HTML (Section Name, Date, URL)
             let listItem = document.createElement('li');
             listItem.classList.add('list-group-item', 'mt-4');
 
-            // Create elements for Table ID, ID, Name, Email, Phone
-            const tableEl = document.createElement('h2');
-            tableEl.textContent = `Table #${i + 1}`;
-
             const hrBreak = document.createElement('hr');
 
-            const idEl = document.createElement('h2');
-            idEl.textContent = `ID: ${tableData[i].customerID}`;
+            const roleEl = document.createElement('h2');
+            roleEl.textContent = `Role: ${teamData[i].teamRole}`;
 
             const nameEl = document.createElement('h2');
-            nameEl.textContent = `Name: ${tableData[i].customerName}`;
+            nameEl.textContent = `Name: ${teamData[i].teamName}`;
 
             const emailEl = document.createElement('h2');
-            emailEl.textContent = `Email: ${tableData[i].customerEmail}`;
+            emailEl.textContent = `Email: ${teamData[i].teamEmail}`;
 
-            const phoneEl = document.createElement('h2');
-            phoneEl.textContent = `Phone: ${tableData[i].phoneNumber}`;
+            const gitEl = document.createElement('h2');
+            gitEl.textContent = `GitHub: ${teamData[i].teamGitHub}`;
 
-            // Append all elements to the listItem
-            listItem.appendChild(tableEl);
+            listItem.appendChild(teamList);
             listItem.appendChild(hrBreak);
-            listItem.appendChild(idEl);
+            listItem.appendChild(roleEl);
             listItem.appendChild(nameEl);
             listItem.appendChild(emailEl);
-            listItem.appendChild(phoneEl);
+            listItem.appendChild(gitEl);
 
-            // Append listItem to tableList
             tableList.appendChild(listItem);
         }
         })
@@ -93,23 +83,18 @@ const runTableQuery = () => {
         });
     };
 
-    // This function resets all of the data in our tables. This is intended to let you restart a demo.
-    const clearTable = () => {
+    const clearTeam = () => {
     alert('Clearing...');
 
     fetch('/api/clear', {
         method: 'POST',
-        headers: {
-        'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
     })
         .then((response) => response.json())
         .then((data) => {
-        let waitList = document.getElementById('waitList');
-        waitList.innerHTML = '';
 
-        let tableList = document.getElementById('tableList');
-        tableList.innerHTML = '';
+        let teamList = document.getElementById('teamList');
+        teamList.innerHTML = '';
         })
         .catch((error) => {
         console.error('Error:', error);
@@ -117,7 +102,7 @@ const runTableQuery = () => {
     };
 
     let clear = document.getElementById('clear');
-    clear.addEventListener('click', clearTable)
+    clear.addEventListener('click', clearTeam)
 
     runTableQuery();
 </script>

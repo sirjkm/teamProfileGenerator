@@ -61,33 +61,25 @@ const submitBtn = document.querySelector('.submit');
 submitBtn.addEventListener('click', (e) => {
   e.preventDefault();
 
-  let newReservation = {
-    customerName: document.getElementById('reserve-name').value.trim(),
-    phoneNumber: document.getElementById('reserve-phone').value.trim(),
-    customerEmail: document.getElementById('reserve-email').value.trim(),
-    customerID: document.getElementById('reserve-unique-id').value.trim(),
+  let newTeam = {
+    teamRole: document.getElementById('team-role').value.trim(),
+    teamName: document.getElementById('team-name').value.trim(),
+    teamEmail: document.getElementById('team-email').value.trim(),
+    teamGitHub: document.getElementById('team-github').value.trim(),
+    teamSchool: document.getElementById('team-school').value.trim(),
   };
-  console.log('submitBtn.onclick -> newReservation', newReservation);
+  console.log('submitBtn.onclick -> newTeam', newTeam);
 
-  fetch('/api/tables', {
+  fetch('/api/team', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(newReservation),
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(newTeam),
   })
     .then((response) => response.json())
     .then((data) => {
       if (data) {
-        alert('Yay! You are officially booked!');
-      } else {
-        alert('Sorry you are on the wait list');
-
-        document.getElementById('reserve-name').value = '';
-        document.getElementById('reserve-phone').value = '';
-        document.getElementById('reserve-email').value = '';
-        document.getElementById('reserve-unique-id').value = '';
-      }
+        alert('Your team member has been logged.');
+      };
     })
       .catch((error) => {
         console.error('Error:', error);
