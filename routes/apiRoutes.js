@@ -1,4 +1,4 @@
-const teamData = require("../data/tableData");
+const teamData = require("../data/teamData");
 
 module.exports = (app) => {
 app.get("/api/team", (req, res) => res.json(teamData));
