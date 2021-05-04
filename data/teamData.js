@@ -1,12 +1,12 @@
-const tableArray = [
+const teamArray = [
     {
     teamRole: "",
     teamName: "",
-    teamEmail: "ahmed@example.com",
-    customerID: "afhaque89",
-    phoneNumber: "000-000-0000",
+    teamEmail: "",
+    teamGitHub: "",
+    teamSchool: "",
     },
 ];
 
-// Note how we export the array. This makes it accessible to other files using require.
-module.exports = tableArray;
+
+module.exports = teamArray;
