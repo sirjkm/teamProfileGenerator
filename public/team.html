@@ -51,7 +51,7 @@ const runTeamQuery = () => {
         for (let i = 0; i < teamData.length; i++) {
             const teamList = document.getElementById('teamList');
 
-            let listItem = document.createElement('li');
+            const listItem = document.createElement('li');
             listItem.classList.add('list-group-item', 'mt-4');
 
             const hrBreak = document.createElement('hr');
@@ -68,18 +68,14 @@ const runTeamQuery = () => {
             const gitEl = document.createElement('h2');
             gitEl.textContent = `GitHub: ${teamData[i].teamGitHub}`;
 
-            listItem.appendChild(teamList);
             listItem.appendChild(hrBreak);
             listItem.appendChild(roleEl);
             listItem.appendChild(nameEl);
             listItem.appendChild(emailEl);
             listItem.appendChild(gitEl);
 
-            tableList.appendChild(listItem);
+            teamList.appendChild(listItem);
         }
-        })
-        .catch((error) => {
-        console.error('Error:', error);
         });
     };
 
@@ -96,15 +92,9 @@ const runTeamQuery = () => {
         let teamList = document.getElementById('teamList');
         teamList.innerHTML = '';
         })
-        .catch((error) => {
-        console.error('Error:', error);
-        });
     };
 
-    let clear = document.getElementById('clear');
-    clear.addEventListener('click', clearTeam)
-
-    runTableQuery();
+    runTeamQuery();
 </script>
 
 </html>
